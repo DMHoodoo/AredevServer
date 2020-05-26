@@ -8,7 +8,7 @@ HOMEPATH=/nwn/run
 # Let's make a shadow-copy of home and link us in
 echo "[*] Linking in user home"
 for p in database hak modules override portraits saves servervault tlk development; do
-  if [ ! -d $ROHOMEPATH/$p ]; then mkdir -v $ROHOMEPATH/$p; fi
+  if [ ! -d $ROHOMEPATH/$p ]; then mkdir -pv $ROHOMEPATH/$p; fi
   if [ ! -e $HOMEPATH/$p ]; then ln -vs $ROHOMEPATH/$p $HOMEPATH/; fi
 done
 for p in dialog.tlk dialogf.tlk; do
