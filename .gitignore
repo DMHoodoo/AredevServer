@@ -1,1 +1,3 @@
 nwnx/*.so
+data/bin/win32
+data/bin/macos
