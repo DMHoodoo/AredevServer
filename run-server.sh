@@ -95,7 +95,7 @@ exec ./nwserver-linux \
   -port ${NWN_PORT:-5121} \
   -interactive \
   -servername "${NWN_SERVERNAME:-I was too lazy to configure my server.}" \
-  -module "${NWN_MODULE:-CopyObjectValidTest}" \
+  -module "${NWN_MODULE:-are-dev-pgcc}" \
   -publicserver "${NWN_PUBLICSERVER:-0}" \
   -maxclients "${NWN_MAXCLIENTS:-96}" \
   -minlevel "${NWN_MINLEVEL:-1}" \
