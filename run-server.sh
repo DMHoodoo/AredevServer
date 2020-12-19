@@ -112,6 +112,4 @@ exec ./nwserver-linux \
   -playerpassword "${NWN_PLAYERPASSWORD}" \
   -dmpassword "${NWN_DMPASSWORD}" \
   -adminpassword "${NWN_ADMINPASSWORD}" \
-  -reloadwhenempty "${NWN_RELOADWHENEMPTY:-0}" \
-  -nwsyncurl "${NWN_NWSYNCURL}" \
-  -nwsynchash "${NWN_NWSYNCHASH}"
+  -reloadwhenempty "${NWN_RELOADWHENEMPTY:-0}"

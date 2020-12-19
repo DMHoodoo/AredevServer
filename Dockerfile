@@ -23,6 +23,8 @@ WORKDIR /nwn/data/bin/linux-x86
 ENTRYPOINT "/bin/bash" "/nwn/run-server.sh"
 RUN mkdir /nwn/nwnx
 COPY /nwnx/*.so /nwn/nwnx/
+RUN mkdir /etc/gcrypt
+RUN echo all >> /etc/gcrypt/hwf.deny
 RUN runDeps="hunspell    \
     libmariadb3 \
     libpq-dev   \
@@ -36,13 +38,13 @@ RUN runDeps="hunspell    \
     dotnet-sdk-3.1" \
     installDeps="ca-certificates wget gpg apt-transport-https"     \
     && apt-get update     \
-    && apt-get install -y --no-install-recommends $installDeps     \
+    && apt-get install -y --fix-missing --no-install-recommends $installDeps     \
     && wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg     \
     && wget -q https://packages.microsoft.com/config/debian/10/prod.list     \
     && mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/     \
     && mv prod.list /etc/apt/sources.list.d/microsoft-prod.list     \
     && apt-get update     \
-    && apt-get -y install --no-install-recommends $runDeps     \
+    && apt-get -y install --fix-missing --no-install-recommends $runDeps     \
     && rm -r /var/cache/apt /var/lib/apt/lists
 COPY  /run-server.patch /nwn/
 RUN gem install nwn-lib
