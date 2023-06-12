@@ -1,5 +1,5 @@
 #FROM nwnxee/builder:latest as builder
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 CMD ["bash"]
 LABEL maintainer=niv@beamdog.com
 RUN apt-get update && \
@@ -29,7 +29,7 @@ RUN runDeps="hunspell    \
     libmariadb3 \
     libpq-dev   \
     libsqlite3-dev  \
-    libruby2.5  \
+    libruby  \
     luajit  \
     libluajit-5.1   \
     libssl1.1   \
