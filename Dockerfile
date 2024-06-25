@@ -1,5 +1,5 @@
 #FROM nwnxee/builder:latest as builder
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 CMD ["bash"]
 LABEL maintainer=niv@beamdog.com
 RUN apt-get update && \
@@ -31,11 +31,12 @@ RUN runDeps="hunspell    \
     libsqlite3-dev  \
     libruby  \
     luajit  \
-    libluajit-5.1   \
-    libssl1.1   \
+    libluajit-5.1-2   \
+    libssl3   \
+    libssl-dev \
     inotify-tools   \
-    patch   \
-    dotnet-sdk-3.1" \
+    patch"   \
+    #dotnet-sdk-3.1" \
     installDeps="ca-certificates wget gpg apt-transport-https"     \
     && apt-get update     \
     && apt-get install -y --fix-missing --no-install-recommends $installDeps     \
@@ -46,6 +47,12 @@ RUN runDeps="hunspell    \
     && apt-get update     \
     && apt-get -y install --fix-missing --no-install-recommends $runDeps     \
     && rm -r /var/cache/apt /var/lib/apt/lists
+
+RUN wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+RUN rm packages-microsoft-prod.deb
+RUN apt-get update && \
+ apt-get install -y dotnet-sdk-8.0
 COPY  /run-server.patch /nwn/
 RUN gem install nwn-lib
 #RUN patch /nwn/run-server.sh < /nwn/run-server.patch
@@ -53,3 +60,4 @@ ENV NWNX_CORE_LOAD_PATH=/nwn/nwnx/
 ENV NWN_LD_PRELOAD=/nwn/nwnx/NWNX_Core.so
 ENV NWNX_SERVERLOGREDIRECTOR_SKIP=n NWN_TAIL_LOGS=n NWNX_CORE_LOG_LEVEL=6 NWNX_SERVERLOGREDIRECTOR_LOG_LEVEL=6
 ENV NWNX_CORE_SKIP_ALL=y
+
