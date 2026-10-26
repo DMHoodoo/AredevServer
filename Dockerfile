@@ -8,13 +8,13 @@ RUN apt-get update && \
 RUN mkdir -p /nwn/data
 RUN mkdir -p /nwn/home
 RUN mkdir -p /nwn/run
-COPY /data/data /nwn/data/data
+COPY /data /nwn/data/data
 ENV NWN_ARCH=linux-x86
-COPY /data/bin/linux-x86/nwmain-linux /data/bin/linux-x86/nwserver-linux /nwn/data/bin/linux-x86/
+COPY /bin/linux-x86/nwserver-linux /nwn/data/bin/linux-x86/
 RUN chmod +x /nwn/data/bin/linux-x86/nwserver-linux
 COPY /run-server.sh /prep-nwn-ini.awk /prep-nwnplayer-ini.awk /nwn/
 RUN chmod +x /nwn/run-server.sh
-COPY /data/lang/en/data/dialog.tlk /nwn/data/lang/en/data/
+COPY /lang/en/data/dialog.tlk /nwn/data/lang/en/data/
 VOLUME /nwn/home
 EXPOSE 5121/udp
 ENV NWN_TAIL_LOGS=y
